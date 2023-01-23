@@ -3,8 +3,9 @@ version: "3.8"
 services:
   mongo:
     image: "mongo:5.0"
-    env_file:
-      - ./app.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
     volumes:
       - "mongodb_data:/data/db"
     restart: "on-failure"
