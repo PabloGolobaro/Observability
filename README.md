@@ -38,10 +38,9 @@
     export GRAYLOG_PASSWORD_SECRET := somepasswordpepper
     export GRAYLOG_ROOT_PASSWORD_SHA2 := 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
 #### API endpoint to use:
-    curl -X GET http://localhost/currency&date="2021/01/01"&char=JPY
+    curl -X GET http://localhost/currency?date=2021/01/01&char=JPY
 #### Services:
 - Grafana - localhost:3000
 - Prometheus - localhost:9090
-- Jaeger - localhost:16686
 - Jaeger - localhost:16686
 - Graylog - localhost:9000
