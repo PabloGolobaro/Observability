@@ -43,5 +43,4 @@
 - Grafana - localhost:3000
 - Prometheus - localhost:9090
 - Jaeger - localhost:16686
-- Jaeger - localhost:16686
 - Graylog - localhost:9000
