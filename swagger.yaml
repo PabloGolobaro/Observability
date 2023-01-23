@@ -1,0 +1,90 @@
+consumes:
+- application/json
+definitions:
+  Valute:
+    description: Valute currency
+    properties:
+      char_code:
+        type: string
+        x-go-name: CharCode
+      date:
+        format: int64
+        type: integer
+        x-go-name: Date
+      id:
+        description: |-
+          in: body
+          id currency
+        type: string
+        x-go-name: ID
+      name:
+        type: string
+        x-go-name: Name
+      nominal:
+        format: double
+        type: number
+        x-go-name: Nominal
+    type: object
+    x-go-package: currency-api/internal/model
+host: localhost
+info:
+  contact:
+    email: nazemnov.g.a@gmail.com
+  description: Сервис для получения курса валют.
+  title: currency-api
+  version: 0.0.1
+paths:
+  /currency:
+    get:
+      description: От параметров зависит фильтрация ответов, можно получить как все курсы волют по дате, таккурс валют конткретной валюты.
+      operationId: GetCurrency
+      parameters:
+      - description: дата в формате 2021/01/01
+        in: query
+        name: date
+        required: true
+        type: string
+      - description: короткое описание валюты(три буквы)
+        in: query
+        name: char
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: GetCurrencyAnswer
+        "400":
+          $ref: GetCurrencyBadAnswer
+        "500":
+          $ref: GetCurrencyBadAnswer
+      summary: Возвращает курс валют в зависимости от параметров с параметром
+      tags:
+      - controllers
+produces:
+- application/json
+responses:
+  GetCurrencyAnswer:
+    description: GetCurrencyAnswer response for GetCurrency
+    schema:
+      items:
+        $ref: '#/definitions/Valute'
+      type: array
+  GetCurrencyBadAnswer:
+    description: GetCurrencyBadAnswer response for GetCurrency
+  Valute:
+    description: Valute currency
+    headers:
+      char_code:
+        type: string
+      date:
+        format: int64
+        type: integer
+      name:
+        type: string
+      nominal:
+        format: double
+        type: number
+schemes:
+- http
+swagger: "2.0"
