@@ -25,7 +25,7 @@
 ``make app``
 - Start loader to collect data into MongoDB:
 ``make load``
-#### ALl environment variables can be set in Makefile
+#### All environment variables are set in Makefile:
     export PORT := 8080
     export DB_PORT := 27017
     export MONGO_INITDB_ROOT_USERNAME := root
