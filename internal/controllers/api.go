@@ -7,13 +7,13 @@ import (
 	"currency-api/internal/store"
 	"currency-api/internal/tracing"
 	"currency-api/pkg/mongo"
+	"github.com/labstack/echo/v4"
 	log "github.com/sirupsen/logrus"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"net/http"
 	"strconv"
-
-	"github.com/labstack/echo/v4"
+	"time"
 )
 
 //GetCurrency get currency controller
@@ -51,11 +51,7 @@ func GetCurrency(c echo.Context) error {
 		reqID = "none"
 	}
 	serviceContext = context.WithValue(serviceContext, "req-id", reqID)
-	err := c.Bind(&response)
-	span.SetAttributes(
-		attribute.String("Charcode", response.CharCode),
-		attribute.String("Date", strconv.Itoa(int(response.Date))),
-	)
+	parsedDate, err := time.Parse("2006/01/02", c.QueryParam("date"))
 	if err != nil {
 		log.WithFields(log.Fields{
 			"req-id":     reqID,
@@ -64,6 +60,12 @@ func GetCurrency(c echo.Context) error {
 		}).Debug("False bind response")
 		return c.JSON(http.StatusInternalServerError, GetCurrencyBadAnswer{Message: err.Error()})
 	}
+	response.CharCode = c.QueryParam("char_code")
+	response.Date = parsedDate.Unix()
+	span.SetAttributes(
+		attribute.String("Charcode", response.CharCode),
+		attribute.String("Date", strconv.Itoa(int(response.Date))),
+	)
 	log.WithFields(log.Fields{
 		"Get Currency": reqID,
 		"Response":     response,
