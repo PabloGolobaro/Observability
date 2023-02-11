@@ -1,10 +1,10 @@
 # Observability
 
 ## Simple REST API with fully instrumented ***observability*** services:
-- Prometheus to get metrics
-- Jaeger to get Opentelemetry traces
-- Grafana to visualize metrics and traces
-- Graylog to collect logs from distributed services
+- ***Prometheus*** to get metrics
+- ***Jaeger*** to get Opentelemetry traces
+- ***Grafana*** to visualize metrics and traces
+- ***Graylog*** to collect logs from distributed services
 - MongoDB as data storage
 
 ### This project can be used as an **example** of how to initially set transparency tools in your project and call it from your code.
@@ -15,7 +15,7 @@
 - github.com/labstack/echo/v4 **router**
 - github.com/sirupsen/logrus **logger**
 - go.mongodb.org/mongo-driver **mongo driver**
-- go.opentelemetry.io/otel/exporters/jaeger
+- go.opentelemetry.io/otel/exporters/jaeger **opentelemetry**
 - github.com/prometheus/client_golang
 
 ---
